@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lemegeton: every game on this PC, in one library</title>
+<meta name="description" content="One launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisoft, with friends, chat and mods built in. For Windows 10 and 11.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lemegeton">
+<meta property="og:description" content="Every game on this PC, whichever store it came from. One launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisoft, with friends, chat and mods built in.">
+<meta property="og:url" content="https://lemmygeton.github.io/Lemegeton/">
+<meta property="og:image" content="https://lemmygeton.github.io/Lemegeton/assets/card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@600;700&family=IM+Fell+English+SC&display=swap">
+<style>
+/* The download page of Lemegeton. It wears what the program wears: night, vellum-white letters, brass, the Fell
+   small capitals for titles and Alegreya for reading. One column, a great deal of room, and one thing that answers
+   the hand: the table of contents, which turns the picture beside it. */
+:root {
+  --night: #0b0806;
+  --panel: #14100b;
+  --text: #efe6d2;
+  --muted: #b9a988;
+  --brass: #c9a24a;
+  --brass-hi: #f0d68a;
+  --line: rgba(214, 178, 110, .2);
+  --title: "IM Fell English SC", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --caps: "Cinzel", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --body: "Alegreya", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --mono: "Cascadia Mono", Consolas, ui-monospace, monospace;
+  --flourish: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='14' fill='none' stroke='%23c9a24a' stroke-width='1'%3E%3Cpath d='M2 7h88M130 7h88' opacity='.7'/%3E%3Cpath d='M110 1.5 115.5 7 110 12.5 104.5 7z' fill='%23c9a24a'/%3E%3Ccircle cx='97' cy='7' r='1.3' fill='%23c9a24a'/%3E%3Ccircle cx='123' cy='7' r='1.3' fill='%23c9a24a'/%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html { background: var(--night); }
+body { margin: 0; background: radial-gradient(1200px 620px at 50% -180px, rgba(201, 162, 74, .16), transparent 70%) no-repeat; color: var(--text); font: 400 19px/1.6 var(--body); font-variant-numeric: lining-nums; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--brass-hi); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: #fff; }
+:focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 3px; }
+.wrap { width: min(1120px, 100% - 48px); margin-inline: auto; }
+
+/* ---- the top: its name, what it is, the one thing to press ---- */
+header.top { display: flex; align-items: center; gap: 12px; padding: 26px 0; }
+header.top img { width: 30px; height: 30px; }
+header.top b { font: 700 15px/1 var(--caps); letter-spacing: .26em; color: var(--brass-hi); }
+.hero { padding: 54px 0 0; text-align: center; }
+h1 { margin: 0 auto; font: 400 clamp(36px, 5.6vw, 64px)/1.08 var(--title); letter-spacing: .01em; text-wrap: balance; }
+h1 span { display: inline-block; }   /* (the line breaks between its two halves, where the comma is) */
+.hero p.say { max-width: 44ch; margin: 22px auto 0; color: var(--muted); font-size: clamp(18px, 2.2vw, 21px); text-wrap: balance; }
+.get { display: inline-block; margin-top: 34px; padding: 17px 38px 15px; border-radius: 3px; color: #1a1004; font: 700 15px/1 var(--caps); letter-spacing: .16em; text-decoration: none;
+  background: linear-gradient(180deg, #f6e4a6 0%, #cda650 46%, #a57b2b 54%, #e3c672 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -1px 0 rgba(0, 0, 0, .4), 0 10px 30px rgba(201, 162, 74, .22); transition: filter .15s, transform .08s; }
+.get:hover { color: #1a1004; filter: brightness(1.08); }
+.get:active { transform: translateY(1px); }
+.facts { margin: 16px 0 0; color: var(--muted); font-size: 16.5px; }
+.facts a { color: var(--muted); }
+figure { margin: 0; }
+.plate { border: 1px solid var(--line); outline: 1px solid rgba(214, 178, 110, .08); outline-offset: 6px; background: var(--panel); box-shadow: 0 34px 90px rgba(0, 0, 0, .6); }
+.hero figure { margin-top: 58px; }
+
+/* ---- a section begins under a flourish ---- */
+section { padding: 104px 0 0; }
+h2 { margin: 0; padding-top: 34px; background: var(--flourish) center top / 220px 14px no-repeat; font: 400 clamp(28px, 3.6vw, 38px)/1.15 var(--title); letter-spacing: .02em; text-align: center; text-wrap: balance; }
+.lede { max-width: 52ch; margin: 14px auto 0; color: var(--muted); text-align: center; text-wrap: balance; }
+
+/* ---- the contents: chapters down the left, the chosen chapter's picture on the right ---- */
+.contents { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 8fr); gap: 46px; align-items: start; margin-top: 46px; }
+.contents ol { margin: 0; padding: 0; list-style: none; counter-reset: chapter; }
+.contents li { counter-increment: chapter; border-top: 1px solid var(--line); }
+.contents li:last-child { border-bottom: 1px solid var(--line); }
+.contents button { display: grid; grid-template-columns: 46px minmax(0, 1fr); width: 100%; padding: 17px 0 16px; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.contents button::before { content: counter(chapter, upper-roman); padding-top: 3px; font: 600 14px/1.5 var(--caps); letter-spacing: .08em; color: var(--brass); }
+.contents b { display: block; font: 400 23px/1.25 var(--title); letter-spacing: .02em; color: var(--muted); transition: color .15s; }
+.contents span { display: block; grid-column: 2; margin-top: 4px; color: var(--muted); font-size: 17.5px; line-height: 1.5; }
+.contents button:hover b, .contents button[aria-current="true"] b { color: var(--brass-hi); }
+.contents button[aria-current="true"] span { color: var(--text); }
+.contents li img { display: none; }
+.stage { position: sticky; top: 28px; }
+.stage img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* ---- the installer's three pages ---- */
+.pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-top: 46px; }
+
+/* ---- what to know first: a term, and what is true of it ---- */
+dl { max-width: 880px; margin: 40px auto 0; }
+dl div { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 8px 30px; padding: 20px 0; border-top: 1px solid var(--line); }
+dl div:last-child { border-bottom: 1px solid var(--line); }
+dt { font: 400 21px/1.3 var(--title); letter-spacing: .02em; color: var(--brass-hi); }
+dd { margin: 0; color: var(--text); }
+
+/* ---- this version ---- */
+.version { max-width: 880px; margin: 40px auto 0; text-align: center; }
+.version p { margin: 0 0 12px; }
+.version .new { white-space: pre-line; color: var(--muted); }
+code { font: 14.5px/1.5 var(--mono); color: var(--brass-hi); overflow-wrap: anywhere; user-select: all; }
+.check { margin-top: 26px; padding: 20px 24px; border: 1px solid var(--line); background: rgba(20, 16, 11, .7); text-align: left; }
+.check p { margin: 0 0 6px; color: var(--muted); font-size: 16.5px; }
+.check p + code { display: block; margin-bottom: 14px; }
+.check code:last-child { margin-bottom: 0; }
+
+footer { margin-top: 110px; padding: 34px 0 54px; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; text-align: center; }
+footer p { max-width: 70ch; margin: 0 auto 8px; text-wrap: balance; }
+
+@media (max-width: 860px) {
+  body { font-size: 18px; }
+  .hero { padding-top: 26px; }
+  section { padding-top: 76px; }
+  .contents { grid-template-columns: minmax(0, 1fr); }
+  .stage { display: none; }
+  .contents button { cursor: default; padding-bottom: 12px; }
+  .contents b, .contents button[aria-current="true"] b { color: var(--brass-hi); }
+  .contents span { color: var(--text); }
+  .contents li img { display: block; width: 100%; margin: 4px 0 22px; border: 1px solid var(--line); }
+  .pages { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  dl div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .plate { outline-offset: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .get, .contents b { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><img src="assets/icon.png" alt="" width="30" height="30"><b>Lemegeton</b></header>
+
+  <main>
+    <div class="hero">
+      <h1><span>Every game on this PC,</span> <span>whichever store it came from</span></h1>
+      <p class="say">Lemegeton is one launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisoft, with friends, chat and mods built in.</p>
+      <a class="get" id="get" href="https://dhgywrftcmvzhzynxctt.supabase.co/storage/v1/object/public/releases/Lemegeton-Setup-1.0.0.exe">Download for Windows</a>
+      <p class="facts"><span id="facts">Version 1.0.0, 12.7 MB.</span> For Windows 10 and 11. <a href="#before">What Windows says when you run it</a></p>
+      <figure class="plate"><img src="assets/library.webp" width="1600" height="900" alt="The library: the game played last at the top, a row of filters for each store, and a wall of game covers."></figure>
+    </div>
+
+    <section aria-labelledby="h-contents">
+      <h2 id="h-contents">What is in it</h2>
+      <div class="contents">
+        <ol id="chapters">
+          <li><button type="button" aria-current="true" data-shot="assets/game.webp" data-alt="A game's page: its art, a Play button, play time, and tabs for updates, news, details and mods.">
+            <b>A page for every game</b><span>What it is, its DLC, patch notes and news, and your mods for it. Each page takes its colours from the game's cover art.</span></button>
+            <img src="assets/game.webp" width="1440" height="810" loading="lazy" alt="A game's page: its art, a Play button, play time, and tabs for updates, news, details and mods."></li>
+          <li><button type="button" data-shot="assets/stores.webp" data-alt="One search showing the same game on Steam, Epic Games and Xbox, each with its price.">
+            <b>One search for the stores</b><span>Search Steam, Epic Games and Xbox together. Buying always happens in the store's own app; Lemegeton never sees a payment.</span></button>
+            <img src="assets/stores.webp" width="1440" height="810" loading="lazy" alt="One search showing the same game on Steam, Epic Games and Xbox, each with its price."></li>
+          <li><button type="button" data-shot="assets/friends.webp" data-alt="The friends list open over the library: friends grouped by the game they are in, then online and offline.">
+            <b>Friends and chat</b><span>See who is online and what they are playing, and message them. It stays in the tray after you close the window, so messages still arrive.</span></button>
+            <img src="assets/friends.webp" width="1440" height="810" loading="lazy" alt="The friends list open over the library: friends grouped by the game they are in, then online and offline."></li>
+          <li><button type="button" data-shot="assets/profile.webp" data-alt="A profile with its own background, a summary, recent activity, friends, and the mods its owner has passed on.">
+            <b>Profiles</b><span>A picture (animated if you like), a background, your own colour and a summary. Open to everyone, or to friends only.</span></button>
+            <img src="assets/profile.webp" width="1440" height="810" loading="lazy" alt="A profile with its own background, a summary, recent activity, friends, and the mods its owner has passed on."></li>
+          <li><button type="button" data-shot="assets/mods.webp" data-alt="Searching Thunderstore for a game's mods from inside Lemegeton, with tabs for the other mod sites.">
+            <b>Mods</b><span>Search Nexus Mods, Thunderstore, Steam Workshop, GameBanana and Modrinth from inside it, build modpacks, and pass a mod or a whole pack to your friends. If you have Claude Code, it can plan and build a mod from an idea.</span></button>
+            <img src="assets/mods.webp" width="1440" height="810" loading="lazy" alt="Searching Thunderstore for a game's mods from inside Lemegeton, with tabs for the other mod sites."></li>
+        </ol>
+        <figure class="stage plate"><img id="shot" src="assets/game.webp" width="1440" height="810" alt="A game's page: its art, a Play button, play time, and tabs for updates, news, details and mods."></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-book">
+      <h2 id="h-book">The installer is a book</h2>
+      <p class="lede">Each step is a page turning, and a seal draws itself while the files copy. It installs for your Windows account only and asks for no administrator.</p>
+      <div class="pages">
+        <figure class="plate"><img src="assets/installer-cover.webp" width="1040" height="680" loading="lazy" alt="The installer's cover: a leather-bound book with a gold seal and a Begin button."></figure>
+        <figure class="plate"><img src="assets/installer-page.webp" width="1040" height="680" loading="lazy" alt="The installer open at its first page, printed like an old book."></figure>
+        <figure class="plate"><img src="assets/installer-progress.webp" width="1040" height="680" loading="lazy" alt="The installer at 49 percent, a seal half drawn on the left-hand page."></figure>
+      </div>
+    </section>
+
+    <section id="before" aria-labelledby="h-before">
+      <h2 id="h-before">Before you install</h2>
+      <dl>
+        <div><dt>Windows will warn you</dt><dd>The installer is not code-signed, so Windows SmartScreen says it does not know the publisher. Choose More info, then Run anyway.</dd></div>
+        <div><dt>What you need</dt><dd>Windows 10 or 11, and the stores whose games you want to see. Lemegeton sits on top of them; it does not replace them.</dd></div>
+        <div><dt>Accounts are optional</dt><dd>You can use it as a launcher without one. An account is only for friends, chat, profiles and sharing mods.</dd></div>
+        <div><dt>Where chat goes</dt><dd>Accounts and chat run on a small hosted database looked after by the author. Chat is not end-to-end encrypted. What you are playing is shown to friends only if you switch that on.</dd></div>
+        <div><dt>Removing it</dt><dd>Installed apps, in Windows Settings. You are asked whether to keep your settings.</dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="h-version">
+      <h2 id="h-version">This version</h2>
+      <div class="version">
+        <p id="dated">Version 1.0.0, published 7 October 2026.</p>
+        <p class="new" id="new">The first version.</p>
+        <p>Lemegeton tells you when a newer one is out, and puts it in when you choose.</p>
+        <div class="check">
+          <p>The installer's SHA-256 fingerprint</p>
+          <code id="sha">2d3c0f274e7f05c7440b9b1df2b4598f7e118cae6bbe1dff91448b07ad222655</code>
+          <p>To check your download, in PowerShell</p>
+          <code id="how">Get-FileHash .\Lemegeton-Setup-1.0.0.exe</code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Lemegeton is not affiliated with Valve, Epic Games, Microsoft, Blizzard, Electronic Arts or Ubisoft. The game art in these pictures belongs to its owners.</p>
+    <p>Made by Lemmygeton. <a href="https://github.com/Lemmygeton/Lemegeton">This page on GitHub</a></p>
+  </footer>
+</div>
+
+<script>
+// The table of contents turns the picture beside it.
+(() => {
+  const shot = document.getElementById('shot');
+  document.querySelectorAll('#chapters button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('#chapters button').forEach((x) => x.setAttribute('aria-current', String(x === b)));
+    shot.src = b.dataset.shot;
+    shot.alt = b.dataset.alt;
+  }));
+})();
+// The newest version is whatever the shelf Lemegeton itself reads its updates from says it is, so this page never
+// has to be edited when one comes out. If the shelf cannot be read, what is written above stands.
+(() => {
+  const SHELF = 'https://dhgywrftcmvzhzynxctt.supabase.co/storage/v1/object/public/releases/';
+  const set = (id, text) => { document.getElementById(id).textContent = text; };
+  fetch(SHELF + 'latest.json?t=' + Math.floor(Date.now() / 60000)).then((r) => (r.ok ? r.json() : null)).then((note) => {
+    if (!note || !/^Lemegeton-Setup-[0-9.]{1,24}\.exe$/.test(note.file) || !/^[0-9.]{1,20}$/.test(note.version)) return;   // (only ever a file of that name, on that shelf)
+    const when = /^\d{4}-\d\d-\d\d$/.test(note.date || '') ? new Date(note.date + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    document.getElementById('get').href = SHELF + note.file;
+    set('facts', 'Version ' + note.version + (note.size > 0 ? ', ' + (note.size / 1048576).toFixed(1) + ' MB.' : '.'));
+    set('dated', 'Version ' + note.version + (when ? ', published ' + when + '.' : '.'));
+    set('new', String(note.notes || '').slice(0, 4000));
+    if (/^[0-9a-f]{64}$/.test(note.sha256 || '')) set('sha', note.sha256);
+    set('how', 'Get-FileHash .\\' + note.file);
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>
