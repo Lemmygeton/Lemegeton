@@ -130,8 +130,8 @@ footer p { max-width: 70ch; margin: 0 auto 8px; text-wrap: balance; }
     <div class="hero">
       <h1><span>Every game on this PC,</span> <span>whichever store it came from</span></h1>
       <p class="say">Lemegeton is one launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisoft, with friends, chat and mods built in.</p>
-      <a class="get" id="get" href="https://dhgywrftcmvzhzynxctt.supabase.co/storage/v1/object/public/releases/Lemegeton-Setup-1.0.0.exe">Download for Windows</a>
-      <p class="facts"><span id="facts">Version 1.0.0, 12.7 MB.</span> For Windows 10 and 11. <a href="#before">What Windows says when you run it</a></p>
+      <a class="get" id="get" href="https://dhgywrftcmvzhzynxctt.supabase.co/storage/v1/object/public/releases/Lemegeton-Setup-1.0.1.exe">Download for Windows</a>
+      <p class="facts"><span id="facts">Version 1.0.1, 12.7 MB.</span> For Windows 10 and 11. <a href="#before">What Windows says when you run it</a></p>
       <figure class="plate"><img src="assets/library.webp" width="1600" height="900" alt="The library: the game played last at the top, a row of filters for each store, and a wall of game covers."></figure>
     </div>
 
@@ -183,14 +183,14 @@ footer p { max-width: 70ch; margin: 0 auto 8px; text-wrap: balance; }
     <section aria-labelledby="h-version">
       <h2 id="h-version">This version</h2>
       <div class="version">
-        <p id="dated">Version 1.0.0, published 7 October 2026.</p>
-        <p class="new" id="new">The first version.</p>
+        <p id="dated">Version 1.0.1, published 7 October 2026.</p>
+        <p class="new" id="new">Just some bug fixes :)</p>
         <p>Lemegeton tells you when a newer one is out, and puts it in when you choose.</p>
         <div class="check">
           <p>The installer's SHA-256 fingerprint</p>
-          <code id="sha">2d3c0f274e7f05c7440b9b1df2b4598f7e118cae6bbe1dff91448b07ad222655</code>
+          <code id="sha">8adae28ebc067c6d94d6309c936169799be8b44800c7b9be05adea0032ff344a</code>
           <p>To check your download, in PowerShell</p>
-          <code id="how">Get-FileHash .\Lemegeton-Setup-1.0.0.exe</code>
+          <code id="how">Get-FileHash .\Lemegeton-Setup-1.0.1.exe</code>
         </div>
       </div>
     </section>
@@ -213,19 +213,45 @@ footer p { max-width: 70ch; margin: 0 auto 8px; text-wrap: balance; }
   }));
 })();
 // The newest version is whatever the shelf Lemegeton itself reads its updates from says it is, so this page never
-// has to be edited when one comes out. If the shelf cannot be read, what is written above stands.
+// has to be edited when one comes out. The installer itself is handed out from GitHub when that very file is among
+// this repository's releases (fetching it there costs the shelf nothing), and from the shelf when it is not. If the
+// shelf cannot be read, GitHub's newest release says what there is; if neither can, what is written above stands.
 (() => {
   const SHELF = 'https://dhgywrftcmvzhzynxctt.supabase.co/storage/v1/object/public/releases/';
+  const REPO = 'Lemmygeton/Lemegeton';
+  const NAMED = /^Lemegeton-Setup-[0-9.]{1,24}\.exe$/;   // (only ever a file of that name)
   const set = (id, text) => { document.getElementById(id).textContent = text; };
-  fetch(SHELF + 'latest.json?t=' + Math.floor(Date.now() / 60000)).then((r) => (r.ok ? r.json() : null)).then((note) => {
-    if (!note || !/^Lemegeton-Setup-[0-9.]{1,24}\.exe$/.test(note.file) || !/^[0-9.]{1,20}$/.test(note.version)) return;   // (only ever a file of that name, on that shelf)
+  const read = (url) => fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const sound = (note) => !!note && NAMED.test(note.file) && /^[0-9.]{1,20}$/.test(note.version);
+  const show = (note, href) => {
     const when = /^\d{4}-\d\d-\d\d$/.test(note.date || '') ? new Date(note.date + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-    document.getElementById('get').href = SHELF + note.file;
+    document.getElementById('get').href = href;
     set('facts', 'Version ' + note.version + (note.size > 0 ? ', ' + (note.size / 1048576).toFixed(1) + ' MB.' : '.'));
     set('dated', 'Version ' + note.version + (when ? ', published ' + when + '.' : '.'));
     set('new', String(note.notes || '').slice(0, 4000));
-    if (/^[0-9a-f]{64}$/.test(note.sha256 || '')) set('sha', note.sha256);
+    set('sha', /^[0-9a-f]{64}$/.test(note.sha256 || '') ? note.sha256 : 'It could not be read just now.');
     set('how', 'Get-FileHash .\\' + note.file);
+  };
+  // where on GitHub the installer a note describes is, if a release there holds that very file ('' if none does)
+  const held = (release, note) => {
+    const a = release && release.draft === false && Array.isArray(release.assets) && release.assets.find((x) => x && x.name === note.file && x.state === 'uploaded' && x.size === note.size && (!x.digest || !note.sha256 || x.digest === 'sha256:' + note.sha256));
+    const at = a ? String(a.browser_download_url || '') : '';
+    return at.startsWith('https://github.com/' + REPO + '/releases/download/') ? at : '';
+  };
+  const hub = (which) => read('https://api.github.com/repos/' + REPO + '/releases/' + which);
+  read(SHELF + 'latest.json?t=' + Math.floor(Date.now() / 60000)).then((note) => {
+    if (sound(note)) {
+      show(note, SHELF + note.file);
+      return hub('tags/v' + note.version).then((release) => { const at = held(release, note); if (at) document.getElementById('get').href = at; });
+    }
+    return hub('latest').then((release) => {   // the shelf is out of reach: go by what GitHub holds
+      const a = release && Array.isArray(release.assets) && release.assets.find((x) => x && NAMED.test(x.name));
+      if (!a) return;
+      const note = { version: String(release.tag_name || '').replace(/^v/, ''), file: a.name, size: a.size, sha256: /^sha256:[0-9a-f]{64}$/.test(a.digest || '') ? a.digest.slice(7) : '',
+        date: String(release.published_at || '').slice(0, 10), notes: String(release.body || '').split(/\r?\n---\r?\n/)[0].trim() };
+      const at = sound(note) ? held(release, note) : '';
+      if (at) show(note, at);
+    });
   }).catch(() => {});
 })();
 </script>
