@@ -14,10 +14,10 @@ Lemegeton is one launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisof
 
 - **One library.** It reads the games you own on all six stores and shows them together. Press Play and the game starts through its own store's app.
 - **A page for every game.** What it is, its DLC, patch notes and news, and your mods for it. Each page takes its colours from the game's cover art.
-- **One search for the stores.** Search Steam, Epic Games and Xbox together. Buying always happens in the store's own app; Lemegeton never sees a payment.
+- **The stores, in one place.** Pick a store and browse it: sales, top sellers and new releases on Steam, Epic Games and Xbox, or search all three together. Buying always happens in the store's own app; Lemegeton never sees a payment.
 - **Friends and chat.** See who is online and what they are playing, and message them. It stays in the tray after you close the window, so messages still arrive.
-- **Profiles.** A picture (animated if you like), a background, your own colour and a summary. Open to everyone, or to friends only.
-- **Mods.** Search Nexus Mods, Thunderstore, Steam Workshop, GameBanana and Modrinth from inside it, build modpacks, and pass a mod or a whole pack to your friends. If you have Claude Code, it can plan and build a mod from an idea.
+- **Profiles.** A picture (animated if you like), a background, your own colour and a summary, with badges and your linked accounts (Steam, Discord and the rest). Open to everyone, or to friends only.
+- **Mods.** Each game shows where its mods live. Search Nexus Mods, Thunderstore, Steam Workshop, GameBanana and Modrinth from inside it, and Get hands a mod to the tool that installs it. Build modpacks and pass them to your friends.
 - **Updates.** It tells you when a new version is out and puts it in when you choose.
 
 | | |
