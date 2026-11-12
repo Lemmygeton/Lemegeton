@@ -13,7 +13,7 @@ Lemegeton is one launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisof
 ## What is in it
 
 - **One library.** It reads the games you own on all six stores and shows them together. Press Play and the game starts through its own store's app.
-- **A page for every game.** What it is, its DLC, patch notes and news, and your mods for it. Each page takes its colours from the game's cover art.
+- **A page for every game.** What it is, its DLC, patch notes and news, and your mods for it. Its Play button takes the colour of the game's cover.
 - **The stores, in one place.** Pick a store and browse it: sales, top sellers and new releases on Steam, Epic Games and Xbox, or search all three together. Buying always happens in the store's own app; Lemegeton never sees a payment.
 - **Friends and chat.** See who is online and what they are playing, and message them. It stays in the tray after you close the window, so messages still arrive.
 - **Profiles.** A picture (animated if you like), a background, your own colour and a summary, with badges and your linked accounts (Steam, Discord and the rest). Open to everyone, or to friends only.
@@ -23,7 +23,7 @@ Lemegeton is one launcher for Steam, Epic Games, Xbox, Battle.net, EA and Ubisof
 | | |
 |---|---|
 | ![A game's page](assets/game.webp) | ![Friends and chat](assets/friends.webp) |
-| ![One search across the stores](assets/stores.webp) | ![A profile](assets/profile.webp) |
+| ![The Stores page](assets/stores.webp) | ![A profile](assets/profile.webp) |
 
 ## The installer is a book
 
@@ -31,7 +31,7 @@ Each step is a page turning, and a seal draws itself while the files copy. It in
 
 | | | |
 |---|---|---|
-| ![The installer's cover](assets/installer-cover.webp) | ![Its first page](assets/installer-page.webp) | ![A seal half drawn at 49 percent](assets/installer-progress.webp) |
+| ![The installer's cover](assets/installer-cover.webp) | ![Its first page](assets/installer-page.webp) | ![Its last page, once installed](assets/installer-done.webp) |
 
 ## Before you install
 
